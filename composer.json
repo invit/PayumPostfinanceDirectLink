@@ -9,7 +9,7 @@
     {
       "name": "Toni Rudolf",
       "email": "toni.rudolf@weekend4two.com"
-    },
+    }
   ],
   "require": {
     "payum/core": "^1.3"
