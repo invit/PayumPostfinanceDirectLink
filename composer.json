@@ -12,13 +12,13 @@
     }
   ],
   "require": {
-    "payum/core": "^1.3"
+    "payum/core": "^1.3",
+    "wysow/postfinance": "dev-master"
   },
   "require-dev": {
     "payum/core": "^1.3@dev",
     "phpunit/phpunit": "~4.0",
-    "symfony/phpunit-bridge": "~2.8|~3.0",
-    "wysow/postfinance": "dev-master"
+    "symfony/phpunit-bridge": "~2.8|~3.0"
   },
   "config": {
     "bin-dir": "bin"
