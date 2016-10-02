@@ -2,20 +2,12 @@
 namespace Payum\PostfinanceDirectLink;
 
 use Payum\Core\Bridge\Spl\ArrayObject;
-use Payum\Core\Exception\LogicException;
 use Payum\Core\GatewayFactory;
 use Payum\PostfinanceDirectLink\Action\Api\CreateTransactionAction;
 use Payum\PostfinanceDirectLink\Action\Api\CaptureTransactionAction;
 use Payum\PostfinanceDirectLink\Action\AuthorizeAction;
-use Payum\Sofort\Action\Api\GetTransactionDataAction;
-use Payum\Sofort\Action\Api\RefundTransactionAction;
 use Payum\PostfinanceDirectLink\Action\CaptureAction;
-use Payum\Sofort\Action\ConvertPaymentAction;
-use Payum\Sofort\Action\NotifyAction;
-use Payum\Sofort\Action\RefundAction;
 use Payum\PostfinanceDirectLink\Action\StatusAction;
-use Payum\Sofort\Action\SyncAction;
-use Sofort\SofortLib\Sofortueberweisung;
 
 class PostfinanceDirectLinkGatewayFactory extends GatewayFactory
 {
@@ -30,14 +22,11 @@ class PostfinanceDirectLinkGatewayFactory extends GatewayFactory
             'payum.action.authorize' => new AuthorizeAction(),
             'payum.action.capture' => new CaptureAction(),
             'payum.action.status' => new StatusAction(),
-            //'payum.action.notify' => new NotifyAction(),
-            //'payum.action.sync' => new SyncAction(),
-            //'payum.action.refund' => new RefundAction(),
-            //'payum.action.convert_payment' => new ConvertPaymentAction(),
+            //'payum.action.refund' => new RefundAction(), TODO: refund
 
             'payum.action.api.create_transaction' => new CreateTransactionAction(),
             'payum.action.api.capture_transation' => new CaptureTransactionAction(),
-            //'payum.action.api.refund_transaction' => new RefundTransactionAction(),
+            //'payum.action.api.refund_transaction' => new RefundTransactionAction(), TODO: refund
         ));
 
         if (false == $config['payum.api']) {
