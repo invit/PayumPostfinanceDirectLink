@@ -70,7 +70,7 @@ class Api
         $directLinkRequest->setPspid($this->options['pspid']);
         $directLinkRequest->setUserId($this->options['user']);
         $directLinkRequest->setPassword($this->options['password']);
-        $directLinkRequest->setAmount($fields['amount']);
+        $directLinkRequest->setAmount((int) $fields['amount']);
         $directLinkRequest->setCurrency($fields['currency']);
 
         if (!isset($fields['operation'])) {
