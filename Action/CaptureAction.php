@@ -9,6 +9,8 @@ use Payum\Core\Request\Capture;
 use Payum\Core\Request\GetHumanStatus;
 use Payum\Core\Security\GenericTokenFactoryAwareTrait;
 use Payum\PostfinanceDirectLink\Request\Api\CaptureTransaction;
+use Payum\PostfinanceDirectLink\Request\Api\CleanupAction;
+use Payum\PostfinanceDirectLink\Request\Api\CleanupTransaction;
 use Payum\PostfinanceDirectLink\Request\Api\CreateTransaction;
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
@@ -43,6 +45,7 @@ class CaptureAction implements ActionInterface, GatewayAwareInterface, GenericTo
         } elseif ($status->isAuthorized()) {
             $this->gateway->execute(new CaptureTransaction($details));
         }
+        $this->gateway->execute(new CleanupTransaction($details));
     }
 
     /**

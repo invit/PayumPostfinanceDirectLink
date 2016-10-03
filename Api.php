@@ -84,11 +84,6 @@ class Api
         $directLinkRequest->setCardno($fields['cardno']);
         $directLinkRequest->validate();
 
-        // remove critical data from payment
-        $fields['cardno'] = str_repeat("X", strlen($fields['cardno']));
-        $fields['cvc'] = str_repeat("X", strlen($fields['cvc']));
-        $fields['ed'] = str_repeat("X", strlen($fields['ed']));
-
         $request = $this->messageFactory->createRequest(
             'POST',
             $directLinkRequest->getPostFinanceUri(),
@@ -107,10 +102,7 @@ class Api
         return array_merge($fields, $directLinkResponse->toArray());
     }
 
-    /**
-     * @param array $fields
-     */
-    public function captureTransaction(array $fields)
+    private function createDirectLinkMaintenanceRequest(string $payId)
     {
         $passphrase = new Passphrase($this->options['sha-in-passphrase']);
         $shaComposer = new AllParametersShaComposer($passphrase);
@@ -120,7 +112,17 @@ class Api
         $directLinkRequest->setPspid($this->options['pspid']);
         $directLinkRequest->setUserId($this->options['user']);
         $directLinkRequest->setPassword($this->options['password']);
-        $directLinkRequest->setPayId($fields['PAYID']);
+        $directLinkRequest->setPayId($payId);
+
+        return $directLinkRequest;
+    }
+
+    /**
+     * @param array $fields
+     */
+    public function captureTransaction(array $fields)
+    {
+        $directLinkRequest = $this->createDirectLinkMaintenanceRequest($fields['PAYID']);
 
         if ($fields['amount'] > 0) {
             $operation = DirectLinkMaintenanceRequest::OPERATION_CAPTURE_LAST_OR_FULL;
@@ -147,5 +149,20 @@ class Api
         $directLinkResponse = new DirectLinkMaintenanceResponse($response->getBody()->getContents());
 
         return array_merge($fields, $directLinkResponse->toArray());
+    }
+
+    /**
+     * @param array $fields
+     *
+     * @return array
+     */
+    public function cleanupTransaction(array $fields)
+    {
+        // remove critical data from payment
+        return array_merge($fields, [
+            'cardno' => str_repeat("X", strlen($fields['cardno'])),
+            'cvc' => str_repeat("X", strlen($fields['cardno'])),
+            'ed' => str_repeat("X", strlen($fields['cardno'])),
+        ]);
     }
 }

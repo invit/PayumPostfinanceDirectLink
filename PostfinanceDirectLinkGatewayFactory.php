@@ -3,11 +3,14 @@ namespace Payum\PostfinanceDirectLink;
 
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\GatewayFactory;
+use Payum\PostfinanceDirectLink\Action\Api\CleanupTransactionAction;
 use Payum\PostfinanceDirectLink\Action\Api\CreateTransactionAction;
 use Payum\PostfinanceDirectLink\Action\Api\CaptureTransactionAction;
 use Payum\PostfinanceDirectLink\Action\AuthorizeAction;
 use Payum\PostfinanceDirectLink\Action\CaptureAction;
+use Payum\PostfinanceDirectLink\Action\CleanupAction;
 use Payum\PostfinanceDirectLink\Action\StatusAction;
+use Payum\PostfinanceDirectLink\Request\Api\CleanupTransaction;
 
 class PostfinanceDirectLinkGatewayFactory extends GatewayFactory
 {
@@ -25,7 +28,8 @@ class PostfinanceDirectLinkGatewayFactory extends GatewayFactory
             //'payum.action.refund' => new RefundAction(), TODO: refund
 
             'payum.action.api.create_transaction' => new CreateTransactionAction(),
-            'payum.action.api.capture_transation' => new CaptureTransactionAction(),
+            'payum.action.api.capture_transaction' => new CaptureTransactionAction(),
+            'payum.action.api.cleanup_transaction' => new CleanupTransactionAction(),
             //'payum.action.api.refund_transaction' => new RefundTransactionAction(), TODO: refund
         ));
 

@@ -38,7 +38,11 @@ class StatusAction implements ActionInterface
                 break;
             case DirectLinkPaymentResponse::STATUS_INCOMPLETE_OR_INVALID:
             case DirectLinkPaymentResponse::STATUS_AUTHORISATION_REFUSED:
+            case DirectLinkPaymentResponse::STATUS_PAYMENT_REFUSED:
                 $request->markFailed();
+                break;
+            case DirectLinkPaymentResponse::STATUS_REFUND:
+                $request->markRefunded();
                 break;
             default:
                 $request->markUnknown();
