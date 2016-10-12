@@ -49,7 +49,7 @@ class PostfinanceDirectLinkGatewayFactory extends GatewayFactory
                     'user' => $config['user'],
                     'password' => $config['password'],
                     'pspid' => $config['pspid'],
-                    'environment' => $config['pspid'],
+                    'environment' => $config['environment'],
                 ];
 
                 return new Api($postfinanceConfig, $config['payum.http_client'], $config['httplug.message_factory']);
