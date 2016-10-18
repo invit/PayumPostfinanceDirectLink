@@ -109,6 +109,13 @@ class Api
         $shaComposer->addParameterFilter(new ShaInParameterFilter()); //optional
 
         $directLinkRequest = new DirectLinkMaintenanceRequest($shaComposer);
+
+        if ($this->options['environment'] === self::PRODUCTION) {
+            $directLinkRequest->setPostFinanceUri(DirectLinkMaintenanceRequest::PRODUCTION);
+        } else {
+            $directLinkRequest->setPostFinanceUri(DirectLinkMaintenanceRequest::TEST);
+        }
+
         $directLinkRequest->setPspid($this->options['pspid']);
         $directLinkRequest->setUserId($this->options['user']);
         $directLinkRequest->setPassword($this->options['password']);
