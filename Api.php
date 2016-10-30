@@ -165,11 +165,21 @@ class Api
      */
     public function cleanupTransaction(array $fields)
     {
-        // remove critical data from payment
-        return array_merge($fields, [
-            'cardno' => str_repeat("X", strlen($fields['cardno'])),
-            'cvc' => str_repeat("X", strlen($fields['cardno'])),
-            'ed' => str_repeat("X", strlen($fields['cardno'])),
-        ]);
+        $this->cleanupParameter($fields, 'cardno');
+        $this->cleanupParameter($fields, 'cvc');
+        $this->cleanupParameter($fields, 'ed');
+
+        return $fields;
+    }
+
+    /**
+     * @param array $fields
+     * @param $parameter
+     */
+    private function cleanupParameter(array &$fields, $parameter)
+    {
+        if (isset($fields[$parameter])) {
+            $fields[$parameter] = str_repeat("X", strlen($fields[$parameter]));
+        }
     }
 }
