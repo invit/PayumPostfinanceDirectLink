@@ -137,6 +137,7 @@ class Api
             $operation = DirectLinkMaintenanceRequest::OPERATION_AUTHORISATION_DELETE_AND_CLOSE;
         }
 
+        $directLinkRequest->setAmount($fields['amount']);
         $directLinkRequest->setOperation($operation);
         $directLinkRequest->validate();
 
