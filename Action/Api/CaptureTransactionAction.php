@@ -19,7 +19,7 @@ class CaptureTransactionAction extends BaseApiAwareAction
 
         $details = ArrayObject::ensureArrayObject($request->getModel());
 
-        $details->validateNotEmpty(['PAYID']);
+        $details->validateNotEmpty(['PAYID', 'amount']);
 
         $details->replace($this->api->captureTransaction((array) $details));
     }
