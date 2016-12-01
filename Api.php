@@ -133,11 +133,11 @@ class Api
 
         if ($fields['amount'] > 0) {
             $operation = DirectLinkMaintenanceRequest::OPERATION_CAPTURE_LAST_OR_FULL;
+            $directLinkRequest->setAmount((int)$fields['amount']);
         } else {
             $operation = DirectLinkMaintenanceRequest::OPERATION_AUTHORISATION_DELETE_AND_CLOSE;
         }
 
-        $directLinkRequest->setAmount((int)$fields['amount']);
         $directLinkRequest->setOperation($operation);
         $directLinkRequest->validate();
 

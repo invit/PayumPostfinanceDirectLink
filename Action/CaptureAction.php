@@ -42,7 +42,7 @@ class CaptureAction implements ActionInterface, GatewayAwareInterface, GenericTo
         if ($status->isNew()) {
             $details['operation'] = DirectLinkPaymentRequest::OPERATION_REQUEST_DIRECT_SALE;
             $this->gateway->execute(new CreateTransaction($details));
-        } elseif ($status->isAuthorized()) {
+        } elseif ($status->isAuthorized() || $status->isFailed()) {
             $this->gateway->execute(new CaptureTransaction($details));
         }
         $this->gateway->execute(new CleanupTransaction($details));

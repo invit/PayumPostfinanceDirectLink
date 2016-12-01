@@ -34,6 +34,8 @@ class StatusAction implements ActionInterface
                 break;
             case DirectLinkPaymentResponse::STATUS_PAYMENT_REQUESTED:
             case DirectLinkPaymentResponse::STATUS_PAYMENT:
+            # change to const as soon as PR is merged and STATUS_AUTHORISATION_CANCELLATION_WAITING is available
+            case 61:
                 $request->markCaptured();
                 break;
             case DirectLinkPaymentResponse::STATUS_INCOMPLETE_OR_INVALID:
