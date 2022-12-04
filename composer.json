@@ -25,5 +25,5 @@
   "autoload": {
     "psr-0": { "Payum\\PostfinanceDirectLink": "" }
   },
-  "target-dir": "Payum/PostfinanceDirectLink",
+  "target-dir": "Payum/PostfinanceDirectLink"
 }
